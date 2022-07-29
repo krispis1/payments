@@ -6,7 +6,6 @@ import com.banking.payments.util.CurrencyUtil.Currency;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
-import java.sql.Timestamp;
 
 @Entity
 @DiscriminatorValue("1")

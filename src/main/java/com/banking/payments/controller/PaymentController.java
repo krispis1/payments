@@ -16,11 +16,24 @@ public class PaymentController {
     private PaymentService paymentService;
 
     @PostMapping("/create")
-    public ResponseEntity<String> createPayment(@RequestParam(required = false) Currency currency, @RequestParam("paymentType") PaymentType paymentType, @RequestParam("amount") Double amount, @RequestParam("debtorIban") String debtorIban, @RequestParam("creditorIban") String creditorIban, @RequestParam(required = false) String details, @RequestParam(required = false) String bicCode) {
+    public ResponseEntity<String> createPayment(@RequestParam(required = false) Currency currency,
+                                                @RequestParam("paymentType") PaymentType paymentType,
+                                                @RequestParam("amount") Double amount,
+                                                @RequestParam("debtorIban") String debtorIban,
+                                                @RequestParam("creditorIban") String creditorIban,
+                                                @RequestParam(required = false) String details,
+                                                @RequestParam(required = false) String bicCode) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(paymentService.savePayment(currency, paymentType, amount, debtorIban, creditorIban, details, bicCode).getPaymentId().toString());
+            return ResponseEntity.status(HttpStatus.OK).body(paymentService.savePayment(currency,
+                                                                                        paymentType,
+                                                                                        amount,
+                                                                                        debtorIban,
+                                                                                        creditorIban,
+                                                                                        details,
+                                                                                        bicCode)
+                                                                                        .getPaymentId().toString());
         } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ExceptionUtils.getStackTrace(ex));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ExceptionUtils.getRootCauseMessage(ex));
         }
     }
 }

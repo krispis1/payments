@@ -3,7 +3,6 @@ package com.banking.payments.model.payments;
 import com.banking.payments.util.CurrencyUtil.Currency;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.sql.Timestamp;
