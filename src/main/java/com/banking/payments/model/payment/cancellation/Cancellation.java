@@ -5,7 +5,6 @@ import com.banking.payments.util.CurrencyUtil.Currency;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.sql.Time;
 import java.sql.Timestamp;
 
 @Entity

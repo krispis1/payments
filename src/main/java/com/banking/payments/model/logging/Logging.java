@@ -1,11 +1,9 @@
 package com.banking.payments.model.logging;
 
 import com.banking.payments.enums.payment.PaymentAction;
-import jdk.internal.net.http.common.Log;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.sql.Time;
 import java.sql.Timestamp;
 
 @Entity
