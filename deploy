@@ -1,0 +1,8 @@
+#!/bin/bash
+systemctl start docker
+docker network create payments-mysql
+docker container run --name mysqldb --network payments-mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=payments -d mysql:8
+gradle wrapper --gradle-version 7.5
+./gradlew bootJar
+docker image build -t payments-jdbc .
+docker container run --network payments-mysql --name payments-jdbc-container -p 8080:8080 -d payments-jdbc
