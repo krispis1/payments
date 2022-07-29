@@ -12,7 +12,8 @@ import java.sql.Timestamp;
 @Table(name = "cancellations")
 public class Cancellation {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "cancellations", sequenceName = "cancellations")
     @Column(name = "cancellation_id")
     private Integer cancellationId;
     @Column(name = "payment_type")

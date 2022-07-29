@@ -16,7 +16,8 @@ import java.time.LocalTime;
 @DiscriminatorColumn(name="payment_type", discriminatorType = DiscriminatorType.INTEGER)
 public abstract class Payment {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "payments", sequenceName = "payments")
     @Column(name = "payment_id")
     private Integer paymentId;
     @NotNull
