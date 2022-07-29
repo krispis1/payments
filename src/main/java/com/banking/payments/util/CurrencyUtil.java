@@ -14,6 +14,7 @@ public class CurrencyUtil {
         EUR, USD
     }
 
+    //currently not used, but for future payment calculations might be useful
     public static double convert(Currency from, Currency to, Double amount) throws IOException {
         OkHttpClient client = new OkHttpClient().newBuilder().build();
 
