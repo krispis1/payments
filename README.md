@@ -1,5 +1,7 @@
 # payments
 
+Make sure docker and gradle are installed on your unix machine. As well as Java 8.
+
 Deployment with Docker commands (exec in root project dir):
 
 Run:
