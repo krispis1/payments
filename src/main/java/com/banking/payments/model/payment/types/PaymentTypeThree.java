@@ -1,6 +1,6 @@
-package com.banking.payments.model.payments.types;
+package com.banking.payments.model.payment.types;
 
-import com.banking.payments.model.payments.Payment;
+import com.banking.payments.model.payment.Payment;
 import com.banking.payments.util.CurrencyUtil.Currency;
 
 import javax.persistence.DiscriminatorValue;
@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@DiscriminatorValue("3")
+@DiscriminatorValue("2")
 public class PaymentTypeThree extends Payment {
     @NotNull
     private String bicCode;
@@ -27,4 +27,6 @@ public class PaymentTypeThree extends Payment {
     public String getBicCode() {
         return this.bicCode;
     }
+
+    private PaymentTypeThree() {}
 }

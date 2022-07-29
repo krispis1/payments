@@ -1,12 +1,13 @@
 package com.banking.payments.service;
 
-import com.banking.payments.model.payments.Payment;
-import com.banking.payments.model.payments.types.PaymentTypeOne;
-import com.banking.payments.model.payments.types.PaymentTypeThree;
-import com.banking.payments.model.payments.types.PaymentTypeTwo;
+import com.banking.payments.model.payment.Payment;
+import com.banking.payments.model.payment.types.PaymentTypeOne;
+import com.banking.payments.model.payment.types.PaymentTypeThree;
+import com.banking.payments.model.payment.types.PaymentTypeTwo;
 import com.banking.payments.repository.PaymentRepository;
 import com.banking.payments.util.CurrencyUtil.Currency;
-import com.banking.payments.util.PaymentType;
+import com.banking.payments.enums.payment.PaymentStatus;
+import com.banking.payments.enums.payment.PaymentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,19 @@ import javax.validation.ConstraintViolationException;
 public class PaymentService {
     @Autowired
     private PaymentRepository paymentRepository;
+    @Autowired
+    private CancellationService cancellationService;
+
+    @Transactional(rollbackOn = Exception.class)
+    public Integer cancelPayment(Integer paymentId) throws Exception {
+        try {
+            Payment payment = paymentRepository.findByPaymentIdAndStatus(paymentId, PaymentStatus.PROCESSED);
+            cancellationService.saveCancellation(paymentRepository.getPaymentTypeById(payment.getPaymentId()), payment.getPaymentId(), payment.getCreationTs());
+            return payment.cancelPayment();
+        } catch (NullPointerException ex) {
+            throw new NullPointerException(String.format("%s payment with ID %d not found.", PaymentStatus.PROCESSED ,paymentId));
+        }
+    }
 
     @Transactional(rollbackOn = Exception.class)
     public Payment savePayment(Currency currency, PaymentType paymentType, Double amount, String debtorIban, String creditorIban, String details, String bicCode) throws ConstraintViolationException {

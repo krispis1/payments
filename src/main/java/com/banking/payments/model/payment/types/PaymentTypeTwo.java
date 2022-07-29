@@ -1,13 +1,13 @@
-package com.banking.payments.model.payments.types;
+package com.banking.payments.model.payment.types;
 
-import com.banking.payments.model.payments.Payment;
+import com.banking.payments.model.payment.Payment;
 import com.banking.payments.util.CurrencyUtil;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("2")
+@DiscriminatorValue("1")
 public class PaymentTypeTwo extends Payment {
     private String details;
 
@@ -28,4 +28,6 @@ public class PaymentTypeTwo extends Payment {
     public String getDetails() {
         return this.details;
     }
+
+    private PaymentTypeTwo() {}
 }

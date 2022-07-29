@@ -2,7 +2,7 @@ package com.banking.payments.controller;
 
 import com.banking.payments.service.PaymentService;
 import com.banking.payments.util.CurrencyUtil.Currency;
-import com.banking.payments.util.PaymentType;
+import com.banking.payments.enums.payment.PaymentType;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,6 +32,15 @@ public class PaymentController {
                                                                                         details,
                                                                                         bicCode)
                                                                                         .getPaymentId().toString());
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ExceptionUtils.getRootCauseMessage(ex));
+        }
+    }
+
+    @PostMapping("/cancel")
+    public ResponseEntity<String> cancelPayment(@RequestParam Integer paymentId) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(String.format("Payment cancelled with ID: %d", paymentService.cancelPayment(paymentId)));
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ExceptionUtils.getRootCauseMessage(ex));
         }
