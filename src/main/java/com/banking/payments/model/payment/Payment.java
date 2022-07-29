@@ -14,7 +14,7 @@ import java.time.LocalTime;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "payments")
 @DiscriminatorColumn(name="payment_type", discriminatorType = DiscriminatorType.INTEGER)
-public class Payment {
+public abstract class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "payment_id")
