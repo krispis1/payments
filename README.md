@@ -6,17 +6,17 @@ Deployment with Docker commands (exec in root project dir):
 
 Run:
 1. chmod +x deploy
-2. ./deploy
+2. sudo ./deploy
 
 If it fails then run commands one by one:
 
-1. systemctl start docker
-2. docker network create payments-mysql
-3. docker container run --name mysqldb --network payments-mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=payments -d mysql:8
-4. gradle wrapper --gradle-version 7.5
-5. ./gradlew bootJar
-6. docker image build -t payments-jdbc .
-7. docker container run --network payments-mysql --name payments-jdbc-container -p 8080:8080 -d payments-jdbc
+1. sudo systemctl start docker
+2. sudo docker network create payments-mysql
+3. sudo docker container run --name mysqldb --network payments-mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=payments -d mysql:8
+4. sudo gradle wrapper --gradle-version 7.5
+5. sudo ./gradlew bootJar
+6. sudo docker image build -t payments-jdbc .
+7. sudo docker container run --network payments-mysql --name payments-jdbc-container -p 8080:8080 -d payments-jdbc
 
 Example api:
 
