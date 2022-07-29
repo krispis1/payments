@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.banking'
-version = '0.0.1-SNAPSHOT'
+version = '1.0'
 sourceCompatibility = '1.8'
 
 configurations {
@@ -24,6 +24,8 @@ dependencies {
 	implementation group: 'mysql', name: 'mysql-connector-java', version: '5.1.44'
 	implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.10.0'
 	implementation group: 'com.google.code.gson', name: 'gson', version: '2.9.0'
+	implementation group: 'org.hibernate', name: 'hibernate-validator', version: '6.1.0.Final'
+	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
