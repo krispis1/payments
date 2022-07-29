@@ -45,4 +45,23 @@ public class PaymentController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ExceptionUtils.getRootCauseMessage(ex));
         }
     }
+
+    @GetMapping("/processed/desc")
+    public ResponseEntity<String> getAllProcessedPaymentsDesc() {
+        return ResponseEntity.status(HttpStatus.OK).body(paymentService.getAllProcessedPaymentsDesc().toString());
+    }
+
+    @GetMapping("/processed/asc")
+    public ResponseEntity<String> getAllProcessedPaymentsAsc() {
+        return ResponseEntity.status(HttpStatus.OK).body(paymentService.getAllProcessedPaymentsAsc().toString());
+    }
+
+    @GetMapping("/get")
+    public ResponseEntity<String> getPayment(@RequestParam Integer paymentId) throws Exception {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(paymentService.getPayment(paymentId).toString());
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ExceptionUtils.getRootCauseMessage(ex));
+        }
+    }
 }

@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class PaymentService {
@@ -59,5 +62,25 @@ public class PaymentService {
     private Payment saveTypeThree(Currency currency, Double amount, String debtorIban, String creditorIban, String bicCode) throws ConstraintViolationException {
         PaymentTypeThree payment = new PaymentTypeThree(currency, amount, debtorIban, creditorIban, bicCode);
         return paymentRepository.save(payment);
+    }
+
+    public List<Integer> getAllProcessedPaymentsDesc() {
+        return paymentRepository.findAllProcessedOrderByAmountDesc();
+    }
+
+    public List<Integer> getAllProcessedPaymentsAsc() {
+        return paymentRepository.findAllProcessedOrderByAmountAsc();
+    }
+
+    public Map<Integer, Double> getPayment(Integer paymentId) throws Exception {
+        try {
+            return new HashMap<Integer, Double>() {
+                {
+                    put(paymentRepository.findByPaymentId(paymentId).getPaymentId(), cancellationService.calculateFee(paymentRepository.getPaymentTypeById(paymentId), paymentRepository.findById(paymentId).get().getCreationTs()));
+                }
+            };
+        } catch (NullPointerException ex) {
+            throw new NullPointerException(String.format("Payment with ID %d not found.", paymentId));
+        }
     }
 }
