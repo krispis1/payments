@@ -21,7 +21,7 @@ public class PaymentTypeOne extends Payment {
         setDetails(details);
     }
 
-    public void setDetails(String details) {
+    private void setDetails(String details) {
         this.details = details;
     }
     public String getDetails() {

@@ -21,7 +21,7 @@ public class PaymentTypeThree extends Payment {
         setBicCode(bicCode);
     }
 
-    public void setBicCode(String bicCode) {
+    private void setBicCode(String bicCode) {
         this.bicCode = bicCode;
     }
     public String getBicCode() {

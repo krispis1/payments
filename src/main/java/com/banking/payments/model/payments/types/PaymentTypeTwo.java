@@ -22,7 +22,7 @@ public class PaymentTypeTwo extends Payment {
         }
     }
 
-    public void setDetails(String details) {
+    private void setDetails(String details) {
         this.details = details;
     }
     public String getDetails() {
