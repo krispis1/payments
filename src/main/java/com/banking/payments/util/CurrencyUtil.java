@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.Map;
 
 public class CurrencyUtil {
-
     public enum Currency {
         EUR, USD
     }

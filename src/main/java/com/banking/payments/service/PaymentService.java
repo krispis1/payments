@@ -8,6 +8,8 @@ import com.banking.payments.repository.PaymentRepository;
 import com.banking.payments.util.CurrencyUtil.Currency;
 import com.banking.payments.enums.payment.PaymentStatus;
 import com.banking.payments.enums.payment.PaymentType;
+import com.banking.payments.util.IbanUtil;
+import org.apache.commons.validator.ValidatorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +38,10 @@ public class PaymentService {
     }
 
     @Transactional(rollbackOn = Exception.class)
-    public Payment savePayment(Currency currency, PaymentType paymentType, Double amount, String debtorIban, String creditorIban, String details, String bicCode) throws ConstraintViolationException {
+    public Payment savePayment(Currency currency, PaymentType paymentType, Double amount, String debtorIban, String creditorIban, String details, String bicCode) throws ConstraintViolationException, ValidatorException {
+        IbanUtil.validate(debtorIban);
+        IbanUtil.validate(creditorIban);
+
         switch (paymentType) {
             case ONE:
                 return saveTypeOne(amount, debtorIban, creditorIban, details);

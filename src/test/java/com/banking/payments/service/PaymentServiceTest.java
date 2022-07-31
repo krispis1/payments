@@ -5,6 +5,7 @@ import com.banking.payments.model.payment.Payment;
 import com.banking.payments.repository.PaymentRepository;
 import com.banking.payments.util.CurrencyUtil;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.commons.validator.ValidatorException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -33,8 +34,8 @@ public class PaymentServiceTest {
     }
 
     @Test
-    public void createPaymentOneValid() {
-        paymentService.savePayment(null, PaymentType.ONE, 10.1, "123", "XYZ", "Payment", null);
+    public void createPaymentOneValid() throws ValidatorException {
+        paymentService.savePayment(null, PaymentType.ONE, 10.1, "LT674673967581434764", "LT674673967581434764", "Payment", null);
 
         List<Payment> payments = paymentRepository.findAll();
 
@@ -43,8 +44,8 @@ public class PaymentServiceTest {
     }
 
     @Test
-    public void createPaymentTwoValid() {
-        paymentService.savePayment(null, PaymentType.TWO, 10.1, "123", "XYZ", null, null);
+    public void createPaymentTwoValid() throws ValidatorException {
+        paymentService.savePayment(null, PaymentType.TWO, 10.1, "LT674673967581434764", "LT674673967581434764", null, null);
 
         List<Payment> payments = paymentRepository.findAll();
 
@@ -53,8 +54,8 @@ public class PaymentServiceTest {
     }
 
     @Test
-    public void createPaymentThreeValid() {
-        paymentService.savePayment(CurrencyUtil.Currency.EUR, PaymentType.THREE, 10.1, "123", "XYZ", "Payment", "0987654321");
+    public void createPaymentThreeValid() throws ValidatorException {
+        paymentService.savePayment(CurrencyUtil.Currency.EUR, PaymentType.THREE, 10.1, "LT674673967581434764", "LT674673967581434764", "Payment", "CBVILT2XXXX");
 
         List<Payment> payments = paymentRepository.findAll();
 
@@ -65,8 +66,8 @@ public class PaymentServiceTest {
     @Test
     public void createPaymentInvalid() {
         try {
-            paymentService.savePayment(null, PaymentType.THREE, 10.1, "123", "XYZ", "Payment", "0987654321");
-        } catch (RuntimeException ex) {
+            paymentService.savePayment(null, PaymentType.THREE, 10.1, "LT674673967581434764", "LT674673967581434764", "Payment", "CBVILT2XXXX");
+        } catch (RuntimeException | ValidatorException ex) {
             assertEquals("ConstraintViolationException: Validation failed for classes [com.banking.payments.model.payment.types.PaymentTypeThree] during persist time for groups [javax.validation.groups.Default, ]\n" +
                     "List of constraint violations:[\n" +
                     "\tConstraintViolationImpl{interpolatedMessage='must not be null', propertyPath=currency, rootBeanClass=class com.banking.payments.model.payment.types.PaymentTypeThree, messageTemplate='{javax.validation.constraints.NotNull.message}'}\n" +
