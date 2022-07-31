@@ -23,11 +23,11 @@ Example api:
 1. curl --location --request POST 'http://localhost:8080/payment/create' \
    --form 'paymentType="ONE"' \
    --form 'amount="12"' \
-   --form 'debtorIban="xxx"' \
-   --form 'creditorIban="yyy"' \
+   --form 'debtorIban="LT674673967581434764"' \
+   --form 'creditorIban="LT674673967581434764"' \
    --form 'details="all ok"'
 2. curl --location --request POST 'http://localhost:8080/payment/cancel' \
    --form 'paymentId="1"'
 3. curl --location --request GET 'http://localhost:8080/payment/processed/desc'
 4. curl --location --request GET 'http://localhost:8080/payment/processed/asc'
-5. curl --location --request GET 'http://localhost:8080/payment/get?paymentId=2'
+5. curl --location --request GET 'http://localhost:8080/payment/get?paymentId=1'
